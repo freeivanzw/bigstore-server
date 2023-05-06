@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/models');
+const { User, Basket } = require('../models/models');
 
 class UserController {
   async register(req, res) {
@@ -23,6 +23,10 @@ class UserController {
         name,
         email,
         password: hashPassword
+      })
+
+      const basketCreate = await Basket.create({
+        userId: userCreated.id,
       })
 
       const token = jwt.sign({
