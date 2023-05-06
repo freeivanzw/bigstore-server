@@ -1,0 +1,22 @@
+API url : host/api
+
+USER:
+    register:
+        req:{
+            name: string, (not null)
+            email: string, (not null)
+            password: string (min length 6)
+        }
+
+        res: {
+            success: true,
+            id: number,
+            email: string,
+            name: string,
+            token: string (12h)
+        }
+
+        error res: {
+            success: false,
+            message: string,
+        }
