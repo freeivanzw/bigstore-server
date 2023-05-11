@@ -40,6 +40,27 @@ USER:
              message: string,
          }
 
+    edit: url: POST 'api/user/edit'
+       req: {
+           headers: {
+               Authorization: Bearer token
+           }
+
+            name: string, or null
+            email: string, or null
+            password: string (min length 6) or null
+       }
+
+       res: {
+        "success": true,
+           "user": {
+               "id": number,
+               "name": sting,
+               "email": string
+           }
+       }
+
+
     isAuth: url: GET  'api/user/auth'
         req: {
             headers: {

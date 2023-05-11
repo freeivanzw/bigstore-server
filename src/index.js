@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const fileupload = require('express-fileupload');
+const bodyParser = require('body-parser');
 const sequelize = require('./db');
 const router = require('./routs/index');
 
@@ -12,6 +14,10 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileupload({
+  useTempFiles : true,
+}));
 app.use(cors({
   origin: 'http://localhost:3000',
 }));
