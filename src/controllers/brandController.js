@@ -15,7 +15,8 @@ class BrandController {
       const brand = await Brand.create({
         name
       })
-      console.log('test2')
+
+
 
       return res.json({
         success: true,

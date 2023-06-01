@@ -9,6 +9,8 @@ class DeviceController {
     try {
       const {name, price, rating, TypeId, BrandId, infoList} = req.body;
 
+      console.log(image)
+
       const {image} = req.files;
       let fileName = '';
 
