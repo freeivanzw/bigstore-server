@@ -20,7 +20,8 @@ app.use(fileupload({
   useTempFiles : true,
 }));
 app.use(cors({
-  origin: 'http://localhost:3000',
+  // origin: 'http://localhost:3000',
+  origin: 'https://freeivanzw.github.io/bigstore',
 }));
 app.use(express.static(path.resolve(__dirname, 'upload')))
 app.use('/api', router)
