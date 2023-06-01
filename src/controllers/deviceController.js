@@ -9,9 +9,7 @@ class DeviceController {
     try {
       const {name, price, rating, TypeId, BrandId, infoList} = req.body;
 
-
       const {image} = req.files;
-      console.log(image)
       let fileName = '';
 
       const validation = validationResult(req);
