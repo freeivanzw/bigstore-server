@@ -20,8 +20,8 @@ app.use(fileupload({
   useTempFiles : true,
 }));
 app.use(cors({
-  // origin: 'http://localhost:3000',
-  origin: 'https://freeivanzw.github.io',
+  origin: ["https://freeivanzw.github.io","http://localhost:3000"],
+  optionsSuccessStatus: 200,
 }));
 app.use(express.static(path.resolve(__dirname, 'upload')))
 app.use('/api', router)
