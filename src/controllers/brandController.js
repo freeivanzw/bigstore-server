@@ -17,7 +17,10 @@ class BrandController {
       })
       console.log('test2')
 
-      return res.json({brand})
+      return res.json({
+        success: true,
+        brand
+      })
     } catch (e) {
       return res.status(400).json({
         success: false,
@@ -51,6 +54,21 @@ class BrandController {
       return res.json({
         success: true,
       })
+    } catch (e) {
+      return res.status(400).json({
+        success: false,
+        message: e.message,
+      })
+    }
+  }
+  async getAll(req, res) {
+    try {
+      const allBrands = await Brand.findAll();
+
+      return res.json({
+        success: true,
+        brands: allBrands
+      });
     } catch (e) {
       return res.status(400).json({
         success: false,

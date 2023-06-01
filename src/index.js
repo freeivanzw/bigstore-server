@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const fileupload = require('express-fileupload');
 const bodyParser = require('body-parser');
+const path = require('path');
 const sequelize = require('./db');
 const router = require('./routs/index');
 
@@ -21,6 +22,7 @@ app.use(fileupload({
 app.use(cors({
   origin: 'http://localhost:3000',
 }));
+app.use(express.static(path.resolve(__dirname, 'upload')))
 app.use('/api', router)
 
 const start = async () => {

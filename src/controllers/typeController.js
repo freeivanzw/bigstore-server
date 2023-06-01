@@ -1,4 +1,4 @@
-const { Type } = require('../models/models');
+const { Type} = require('../models/models');
 const { validationResult } = require('express-validator');
 
 class TypeController {
@@ -16,7 +16,10 @@ class TypeController {
         name
       })
 
-      return res.json({type})
+      return res.json({
+        success: true,
+        type
+      })
     } catch (e) {
       return res.status(400).json({
         success: false,
@@ -50,6 +53,21 @@ class TypeController {
       return res.json({
         success: true,
       })
+    } catch (e) {
+      return res.status(400).json({
+        success: false,
+        message: e.message,
+      })
+    }
+  }
+  async getAll(req, res) {
+    try {
+      const allTypes = await Type.findAll();
+
+      return res.json({
+        success: true,
+        types: allTypes
+      });
     } catch (e) {
       return res.status(400).json({
         success: false,

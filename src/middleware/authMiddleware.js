@@ -15,6 +15,7 @@ const authMiddleware = (req, res, next) => {
 
     if (isValid) {
       req.user = jwt.decode(token, process.env.JWT_KEY)
+
       return next();
     } else {
       return res.status(403).json({

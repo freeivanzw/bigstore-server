@@ -6,7 +6,7 @@ const { User, Basket } = require('../models/models');
 class UserController {
   async register(req, res) {
     try {
-      const {name, email, password} = req.body;
+      const {name, email, password, roel} = req.body;
       const validation = validationResult(req);
 
       if (validation.errors.length !== 0) {
@@ -22,17 +22,19 @@ class UserController {
       const userCreated = await User.create({
         name,
         email,
-        password: hashPassword
+        password: hashPassword,
+        roel
       })
 
       const basketCreate = await Basket.create({
-        userId: userCreated.id,
+        UserId: userCreated.id,
       })
 
       const token = jwt.sign({
         id: userCreated.id,
         email: userCreated.email,
         name: userCreated.name,
+        roel: userCreated.roel,
       }, process.env.JWT_KEY,{ expiresIn: '12h' })
 
       res.json({
@@ -40,6 +42,7 @@ class UserController {
         id: userCreated.id,
         email: userCreated.email,
         name: userCreated.name,
+        roel: userCreated.roel,
         token
       })
     } catch (e) {
@@ -75,6 +78,7 @@ class UserController {
           id: userData.id,
           email: userData.email,
           name: userData.name,
+          roel: userData.roel,
         }, process.env.JWT_KEY,{ expiresIn: '12h' })
 
         return res.json({
@@ -82,6 +86,7 @@ class UserController {
           id: userData.id,
           email: userData.email,
           name: userData.name,
+          roel: userData.roel,
           token
         })
       } else {
@@ -106,12 +111,13 @@ class UserController {
         where: {
           id: userId
         }
-      })
+      });
 
       const newToken = jwt.sign({
         id: user.id,
         email: user.email,
-        name: user.name
+        name: user.name,
+        roel: user.roel,
       }, process.env.JWT_KEY)
 
 
@@ -120,10 +126,14 @@ class UserController {
         id: user.id,
         email: user.email,
         name: user.name,
+        roel: user.roel,
         token: newToken
       })
     } catch (e) {
-      console.log(e)
+      res.status(404).json({
+        success: false,
+        message: e.message,
+      })
     }
   }
   async edit(req, res) {
